@@ -8,5 +8,4 @@ cache:
 
 script:
 - ./fake_build.sh
-- ./gradlew clean publish -i --continue
-- ./gradlew -b finalize.gradle finalize -i
+- ./gradle build
