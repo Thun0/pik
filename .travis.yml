@@ -1,3 +1,10 @@
 language: java
 
-script: ./fake_build.sh
+cache:
+  directories:
+  - $HOME/.gradle
+
+script:
+- ./fake_build.sh
+- ./gradlew clean publish -i --continue
+- ./gradlew -b finalize.gradle finalize -i
