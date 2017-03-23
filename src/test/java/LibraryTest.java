@@ -10,10 +10,4 @@ public class LibraryTest {
         Library classUnderTest = new Library();
         assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
     }
-    
-    @Test public void testToFail() {
-    	System.out.println("Test: testToFail()");
-        Library classUnderTest = new Library();
-        assertFalse("Expect to fail", classUnderTest.someLibraryMethod());
-    }
 }
