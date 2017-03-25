@@ -7,7 +7,6 @@ defaultTasks 'initSourceFolders'
 task initSourceFolders { // add << before { to prevent executing during configuration phase
    sourceSets*.java.srcDirs*.each { it.mkdirs() }
    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
-   println('fsdaread')
 }
 
 task wrapper(type: Wrapper) {
