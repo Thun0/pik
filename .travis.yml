@@ -12,10 +12,10 @@ script:
 
 deploy:
   provider: releases
-  api_key:
-  	secure: ee9d8fe5e6fdd2215d9a294f8377fc23e9122f5d
+  user: "Balbinka"
+  password: "kobylinski2017"
   file_glob: true
-  file: *
+  file: pik\*
   skip_cleanup: true
   on:
     tags: true
