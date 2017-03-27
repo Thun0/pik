@@ -9,3 +9,13 @@ cache:
 script:
 - ./fake_build.sh
 - ./gradlew build
+
+deploy:
+  provider: releases
+  api_key:
+  	secure: ee9d8fe5e6fdd2215d9a294f8377fc23e9122f5d
+  file_glob: true
+  file: *
+  skip_cleanup: true
+  on:
+    tags: true
