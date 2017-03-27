@@ -18,4 +18,6 @@ deploy:
   file: pik\*
   skip_cleanup: true
   on:
+  	repo: [pik]
     tags: true
+    all_branches: true
