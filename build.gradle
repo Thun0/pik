@@ -4,6 +4,8 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+        providedCompile 'org.apache.tomcat:tomcat-catalina:7.0.52'
+        //classpath("com.bmuschko:gradle-tomcat-plugin:2.2.5")
     }
 }
 
@@ -11,6 +13,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
+//apply plugin: 'com.bmuschko.tomcat'
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
@@ -26,7 +29,7 @@ jar {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 sourceCompatibility = 1.8
@@ -35,4 +38,8 @@ targetCompatibility = 1.8
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     testCompile("junit:junit:4.12")
+    //def tomcatVersion = '7.0.76'
+    //tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+    //       "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+    //       "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 }
