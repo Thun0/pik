@@ -24,10 +24,15 @@ war {
 	webAppDirName = 'dist'
 }
 
+task npmInstall(type:Exec) {
+    commandLine = [System.properties['os.name'].toLowerCase().contains('windows') ? 'npm.cmd' : 'npm', 'install']
+}
+
 task ngBuild(type:Exec) {
-	
     commandLine = [System.properties['os.name'].toLowerCase().contains('windows') ? 'ng.cmd' : 'ng', 'build']
 }
+
+ngBuild.dependsOn npmInstall
 
 war.dependsOn ngBuild
 
