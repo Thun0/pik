@@ -2,11 +2,11 @@ bin/
 build/
 
 settings.gradle
-
 .gradle/
+fake_build.sh
+
 gradle/
 .classpath
-fake_build.sh
 gradlew
 gradlew.bat
 
