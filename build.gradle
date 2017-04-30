@@ -24,8 +24,12 @@ war {
 	webAppDirName = 'dist'
 }
 
-//task ng
+task ngBuild(type:Exec) {
+	
+    commandLine = [System.properties['os.name'].toLowerCase().contains('windows') ? 'ng.cmd' : 'ng', 'build']
+}
 
+war.dependsOn ngBuild
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
