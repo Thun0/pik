@@ -13,6 +13,7 @@ import java.util.List;
 @RequestMapping("/api/user")
 final class UserController {
  
+	@Autowired
     private final UserRepository repository;
  
     @Autowired
