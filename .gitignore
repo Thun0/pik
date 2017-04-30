@@ -1,1 +1,12 @@
 /bin/
+/build/
+/.gradle/
+/.settings/
+/gradle/
+.classpath
+.project
+fake_build.sh
+gradlew
+gradlew.bat
+README.md
+settings.gradle
