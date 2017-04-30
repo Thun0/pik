@@ -12,19 +12,6 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
 
-sourceSets {
-	main {
-		java {
-       		srcDirs = ['src/main/java']
-		}
-	}
-}
-
-war {
-	webAppDirName = 'src/main/webapp'
-	//destinationDir = '/src/main/webapp'
-}
-     
 task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
 }
