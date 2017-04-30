@@ -21,8 +21,11 @@ sourceSets {
 }
 
 war {
-	webAppDirName = 'src/main/webapp'
+	webAppDirName = 'dist'
 }
+
+//task ng
+
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
