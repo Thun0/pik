@@ -1,12 +1,11 @@
 <!doctype html>
 <html>
 <head>
-  <base href="/">
   <meta charset="utf-8">
   <title>PikFront</title>
   <base id="base">
   <script>        
-   document.getElementById('base').href = document.location.href;
+   document.getElementById('base').href = document.location.origin + '/' + document.location.pathname.split('/')[1] + '/';
   </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
