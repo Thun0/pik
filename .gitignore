@@ -1,5 +1,10 @@
+# binaries:
+
 bin/
 build/
+src/main/resources/*
+
+# gradle things that should not change (most likely):
 
 settings.gradle
 .gradle/
@@ -10,11 +15,14 @@ gradle/
 gradlew
 gradlew.bat
 
+# eclipse project stuff that eclipse will handle because project will be imported as gradle project,
+# not a regular one:
+
 .settings/
 .project
 .classpath
 
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+# Angular: See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
 /dist
