@@ -1,5 +1,9 @@
 <h1>PIK</h1> <img src="https://travis-ci.org/Thun0/pik.svg?branch=master"/>
 
+<h2>how to import:</h2>
+Import as Eclipse gradle project (existing gradle project), build with gradle build. 
+To obtain dependencies right-click on project and select gradle -> refresh gradle project.
+
 <h2>in index.html:</h2>
 document.getElementById('base').href = '/' is for developing locally (ng run), 
 document.location.origin + '/' + document... is for deploying on tomcat
