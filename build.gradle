@@ -12,17 +12,6 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
 
-sourceSets {
-	main {
-		java {
-       		srcDirs = ['src/main/java']
-		}
-	}
-}
-
-war {
-	webAppDirName = 'dist'
-}
 
 task npmInstall(type:Exec) {
     commandLine = [System.properties['os.name'].toLowerCase().contains('windows') ? 'npm.cmd' : 'npm', 'install']
@@ -34,7 +23,7 @@ task ngBuild(type:Exec) {
 
 ngBuild.dependsOn npmInstall
 
-war.dependsOn ngBuild
+processResources.dependsOn ngBuild
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
