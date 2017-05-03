@@ -23,7 +23,7 @@ task ngBuild(type:Exec) {
 
 ngBuild.dependsOn npmInstall
 
-war.dependsOn ngBuild
+processResources.dependsOn ngBuild
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
