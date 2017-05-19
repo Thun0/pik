@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Observable } from 'rxjs/Observable';
 import { Hero }        from './hero';
 import { HeroService } from './hero.service';
 
@@ -9,14 +9,34 @@ import { HeroService } from './hero.service';
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
+  errorMessage: string;
   heroes: Hero[] = [];
+  mode = 'Observable';
 
   constructor(private heroService: HeroService) { }
 
   ngOnInit(): void {
     this.heroService.getHeroes()
-      .then(heroes => this.heroes = heroes.slice(1, 5));
+      .subscribe(
+       heroes => this.heroes = heroes.slice(1, 5),
+       error =>  this.errorMessage = <any>error);
   }
+  
+  getHeroes() {
+    this.heroService.getHeroes()
+                     .subscribe(
+                       heroes => this.heroes = heroes,
+                       error =>  this.errorMessage = <any>error);
+  }
+  
+  addHero(name: string) {
+    if (!name) { return; }
+    this.heroService.create(name)
+                     .subscribe(
+                       hero  => this.heroes.push(hero),
+                       error =>  this.errorMessage = <any>error);
+  }
+  
 }
 
 

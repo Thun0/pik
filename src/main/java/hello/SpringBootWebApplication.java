@@ -1,5 +1,4 @@
 package hello;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 public class SpringBootWebApplication extends SpringBootServletInitializer {
 
 	@Autowired
-	private UserRepository repository; 
+	private HeroRepository repository; 
 	
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -28,13 +27,13 @@ public class SpringBootWebApplication extends SpringBootServletInitializer {
     void init() {
         repository.deleteAll();
 
-        User arthur = new User("Arthur", "Dent");
-        User trillian = new User("Trillian", "McMillan");
-        User ford = new User("Ford", "Prefect");
+        Hero h1 = new Hero("Mr. Nice");
+        Hero h2 = new Hero("Narco");
+        Hero h3 = new Hero("Ford");
 
-        repository.save(arthur);
-        repository.save(trillian);
-        repository.save(ford);
+        repository.save(h1);
+        repository.save(h2);
+        repository.save(h3);
     }
 
 }
