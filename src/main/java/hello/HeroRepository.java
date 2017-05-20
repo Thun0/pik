@@ -10,5 +10,5 @@ public interface HeroRepository extends MongoRepository<Hero, String> {
 	    public Hero findById(@Param("id") String id);
 	    public void delete(@Param("id") String id);
 	    
-	    public Hero update(@Param("id") String id, @Param("name") String new_name);
+	    //public Hero update(@Param("id") String id, @Param("name") String new_name);
 }

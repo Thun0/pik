@@ -42,11 +42,11 @@ final class HeroController {
     Hero getHeroById(@PathVariable String id) {
         return repository.findById(id);
     }
-    
+    /**
     @RequestMapping(value = "/byid/{id}", method = RequestMethod.PUT)
     Hero updateHero(@PathVariable String id) {
         return repository.update(id, "str");
-    }
+    }*/
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     void deleteHero(@PathVariable String id) {
