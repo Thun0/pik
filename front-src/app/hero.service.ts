@@ -6,7 +6,9 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
+
 import { Hero } from './hero';
+
 @Injectable()
 export class HeroService {
   
@@ -29,33 +31,39 @@ export class HeroService {
       .catch(this.handleError);
   }
   
-   getHero(id: number): Observable<Hero> {
+   getHeroById(id: number): Observable<Hero> {
     const url = `${this.heroesUrl}/${id}`;
     return this.http
       .get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }
+  
+   getHeroByName(name: string): Observable<Hero> {
+    const url = `${this.heroesUrl}/${name}`;
+    return this.http
+      .get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
        
-  /**     
+       
   delete(id: number): Observable<void> {
-    console.log("hero.service.delete()");
     const url = `${this.heroesUrl}/${id}`;
     return this.http
       .delete(url, {headers: this.headers})
-      .map(this.extractData)
+      .map(() => null)
       .catch(this.handleError);
   }
       
  
   update(hero: Hero): Observable<Hero> {
-    console.log("hero.service.update()");
     const url = `${this.heroesUrl}/${hero.id}`;
     return this.http
       .put(url, JSON.stringify(hero), {headers: this.headers})
       .map(this.extractData)
       .catch(this.handleError);
-  }*/
+  }
   
   private extractData(res: Response) {
     let body = res.json();
