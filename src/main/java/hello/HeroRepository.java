@@ -7,7 +7,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface HeroRepository extends MongoRepository<Hero, String> {
 
 	    public Hero findByName(@Param("name") String name);
-	    //public List<User> findByLastName(@Param("name") String name);
 	    public Hero findById(@Param("id") String id);
 	    public void delete(@Param("id") String id);
+	    
+	    public Hero update(@Param("id") String id, @Param("name") String new_name);
 }

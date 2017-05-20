@@ -13,6 +13,8 @@ import { Hero } from './hero';
 export class HeroService {
   
   private heroesUrl = '/pik/api/hero';  // URL to web API
+  private heroNameUrl = '/pik/api/hero/byname';
+  private heroIdUrl = '/pik/api/hero/byid';
   private headers = new Headers({ 'Content-Type': 'application/json' });
   constructor (private http: Http) {}
   
@@ -31,8 +33,8 @@ export class HeroService {
       .catch(this.handleError);
   }
   
-   getHeroById(id: number): Observable<Hero> {
-    const url = `${this.heroesUrl}/${id}`;
+   getHeroById(id: string): Observable<Hero> {
+    const url = `${this.heroIdUrl}/${id}`;
     return this.http
       .get(url)
       .map(this.extractData)
@@ -40,7 +42,7 @@ export class HeroService {
   }
   
    getHeroByName(name: string): Observable<Hero> {
-    const url = `${this.heroesUrl}/${name}`;
+    const url = `${this.heroNameUrl}/${name}`;
     return this.http
       .get(url)
       .map(this.extractData)
@@ -58,7 +60,7 @@ export class HeroService {
       
  
   update(hero: Hero): Observable<Hero> {
-    const url = `${this.heroesUrl}/${hero.id}`;
+    const url = `${this.heroIdUrl}/${hero.id}`;
     return this.http
       .put(url, JSON.stringify(hero), {headers: this.headers})
       .map(this.extractData)

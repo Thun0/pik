@@ -34,6 +34,7 @@ public class SpringBootWebApplication extends SpringBootServletInitializer {
         repository.save(h1);
         repository.save(h2);
         repository.save(h3);
+
     }
 
 }

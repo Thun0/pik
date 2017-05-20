@@ -33,9 +33,19 @@ final class HeroController {
     }
     
 
-    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
+    @RequestMapping(value = "/byname/{name}", method = RequestMethod.GET)
     Hero getHeroByName(@PathVariable String name) {
         return repository.findByName(name);
+    }
+    
+    @RequestMapping(value = "/byid/{id}", method = RequestMethod.GET)
+    Hero getHeroById(@PathVariable String id) {
+        return repository.findById(id);
+    }
+    
+    @RequestMapping(value = "/byid/{id}", method = RequestMethod.PUT)
+    Hero updateHero(@PathVariable String id) {
+        return repository.update(id, "str");
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
