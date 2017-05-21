@@ -11,6 +11,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
 
 
 task npmInstall(type:Exec) {
