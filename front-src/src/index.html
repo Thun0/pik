@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PIK - Korpusomat Extension</title>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Polyfills -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('main.js').catch(function(err){ console.error(err); });
+    </script>
+  </head>
+
+  <body>
+    <my-app>
+	   <center>
+	   		<h2 id="h2-loading">
+	   		 	Loading...
+	 		</h2>	
+	   </center>
+	   <script>
+	   		var intervalId = setInterval(function(){
+	   			var elem = document.getElementById("h2-loading");
+	   			if(elem != null) elem.innerHTML = "Loading...</br>(If you still see it after a while, something is probably messed up)";
+	   			clearInterval(intervalId);
+	   		}, 3000);
+	   </script>
+   </my-app>
+  </body>
+</html>
