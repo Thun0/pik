@@ -52,6 +52,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-rest")
     compile("org.springframework.boot:spring-boot-starter-web") 
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compile("org.springframework:spring-oxm:4.1.5.RELEASE")
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     providedRuntime group: 'javax.servlet', name: 'javax.servlet-api'
     testCompile("junit:junit")
