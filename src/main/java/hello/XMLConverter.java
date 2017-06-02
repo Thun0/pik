@@ -2,11 +2,18 @@ package hello;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import org.springframework.oxm.Marshaller;
-import org.springframework.oxm.Unmarshaller;
+
+import org.exolab.castor.xml.MarshalException;
+import org.exolab.castor.xml.Marshaller;
+import org.exolab.castor.xml.Unmarshaller;
+import org.exolab.castor.xml.ValidationException;
+
+
 
 public class XMLConverter {
 	
@@ -18,9 +25,9 @@ public class XMLConverter {
 		return marshaller;
 	}
 
-	public void setMarshaller(Marshaller marshaller) 
+	public void setMarshaller(Marshaller marshaller2) 
 	{
-		this.marshaller = marshaller;
+		this.marshaller = marshaller2;
 	}
 	
 	public Unmarshaller getUnmarshaller() 
@@ -33,30 +40,30 @@ public class XMLConverter {
 		this.unmarshaller = unmarshaller;
 	}
 	
-	public void convertFromObjectToXML(Object object, String filepath) throws IOException 
+	public void convertFromObjectToXML(Object object, String filepath) throws IOException, MarshalException, ValidationException 
 	{
-		FileOutputStream os = null;
+		FileWriter writer = null;
 		try 
 		{
-			os = new FileOutputStream(filepath);
-			getMarshaller().marshal(object, new StreamResult(os));
+			writer = new FileWriter(filepath);
+			getMarshaller().marshal(object, writer);
 		} 
 		finally 
 		{
-			if (os != null) 
+			if (writer != null) 
 			{
-				os.close();
+				writer.close();
 			}
 		}	
 	}
 	
-	public Object convertFromXMLToObject(String xmlfile) throws IOException 
+	public Object convertFromXMLToObject(String xmlfile) throws IOException, MarshalException, ValidationException 
 	{
-		FileInputStream is = null;
+		FileReader is = null;
 		try 
 		{
-			is = new FileInputStream(xmlfile);
-			return getUnmarshaller().unmarshal(new StreamSource(is));
+			is = new FileReader(xmlfile);
+			return getUnmarshaller().unmarshal(is);
 		} 
 		finally 
 		{
