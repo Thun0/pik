@@ -23,7 +23,8 @@ public class LinerCommand {
 		         new InputStreamReader(cmdProc.getInputStream()));
 		String line;
 		while ((line = stdoutReader.readLine()) != null) {
-		   tokens.add(getToken(line));
+			tokens.add(line);
+		   //tokens.add(getToken(line));
 		}
 		
 		return cmdProc.exitValue();
