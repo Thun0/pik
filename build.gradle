@@ -59,4 +59,5 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     providedRuntime group: 'javax.servlet', name: 'javax.servlet-api'
     testCompile("junit:junit")
+    testCompile 'junit:junit:4.12'
 }
