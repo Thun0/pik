@@ -2,7 +2,7 @@ package hello;
 
 import java.util.List;
 
-public class ArrayList {
+public class LexArrayList {
 
 	String owner;
 	String date;
