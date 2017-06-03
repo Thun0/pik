@@ -1,7 +1,5 @@
 package hello.model;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -91,6 +89,37 @@ public class XMLReader {
         } 
         else 
         	return null;	
+	}
+	
+	public String getDefinitionFromLexicalUnit(LexicalUnit lu)
+	{
+		String desc = lu.getDesc();
+		if(desc.contains("##D:"))
+		{
+			int pos = desc.indexOf("##D:");
+			String sub = desc.substring(pos+5);
+			int dot = sub.indexOf(".");
+			if(dot == -1)
+				return sub;
+			return sub.substring(0, dot+1);
+		}
+		return "Nie znaleziono.";
+	}
+	
+	public List<String> getExamplesFromLexicalUnit(LexicalUnit lu)
+	{
+		String sub = lu.getDesc();
+		List<String> ret = new ArrayList<>();
+		while(sub.contains("##W:"))
+		{
+			int pos = sub.indexOf("##W:");
+			sub = sub.substring(pos+5);
+			int dot = sub.indexOf(".");
+			if(dot == -1)
+				ret.add(sub);
+			ret.add(sub.substring(0, dot+1));
+		}
+		return ret;
 	}
 	
 	public LexicalUnit nodeToLexicalUnit(Node node)

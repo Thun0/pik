@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.xml.sax.SAXException;
 
 import hello.LexArrayList;
+import hello.LexicalUnit;
 import hello.MyFileReader;
 import hello.Synset;
 import hello.XMLConverter;
@@ -101,10 +103,20 @@ public class EchoController {
 		///////////////////////////////////
 		XMLReader xmlr = new XMLReader();
 		Synset ss = xmlr.searchForSynsetByLexicalUnit(file, "102034");
-		
+		LexicalUnit lu = xmlr.searchForLexicalUnit(file, "name", "-krotny");
 		return ss;
 	}
 
+	@RequestMapping("/def")
+	@ResponseBody
+	public String getDefinition(@RequestParam(value="filepath", defaultValue="test.xml") String filepath) throws XPathExpressionException, SAXException, IOException, ParserConfigurationException
+	{
+		File file = new ClassPathResource(filepath).getFile();
+		
+		XMLReader xmlr = new XMLReader();
+		LexicalUnit lu = xmlr.searchForLexicalUnit(file, "name", "-krotny");
+		return xmlr.getDefinitionFromLexicalUnit(lu);
+	}
 	
 	@RequestMapping("/liner2")
 	public ArrayList<String> executeLiner2(@RequestParam(value="filepath", defaultValue="/opt/liner2.3/test/sentence.xml") String filepath) {
