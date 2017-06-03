@@ -1,9 +1,5 @@
 package hello.model;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
-//import static org.hamcrest.CoreMatchers.instanceOf;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
