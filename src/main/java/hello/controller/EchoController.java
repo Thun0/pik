@@ -114,6 +114,10 @@ public class EchoController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return cmd.getTokens();
+		ArrayList<String> s = cmd.getTokens();
+		if(s.size() == 0) {
+			s.add("Something went terribly wrong!");
+		}
+		return s;
 	}
 }
