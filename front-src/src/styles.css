@@ -39,6 +39,13 @@ button:disabled {
   cursor: auto;
 }
 
+button.link {
+	font-family: Consolas, monospace;
+	background:none;border:none;
+    padding: 0;
+    font-size: 18px;
+} 
+
 /* Navigation link styles */
 nav a {
   padding: 5px 10px;
