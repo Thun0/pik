@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.ServletContext;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+
 import org.exolab.castor.mapping.Mapping;
 import org.exolab.castor.mapping.MappingException;
 import org.exolab.castor.xml.MarshalException;
@@ -19,12 +23,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.xml.sax.SAXException;
 
 import hello.LexArrayList;
 import hello.MyFileReader;
+import hello.Synset;
 import hello.XMLConverter;
 import hello.model.Echo;
 import hello.model.LinerCommand;
+import hello.model.XMLReader;
 
 @RestController
 @RequestMapping("/echo")
@@ -67,7 +74,7 @@ public class EchoController {
 	
 	
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
-	public LexArrayList echo(@RequestParam(value="message", defaultValue="MESSAGE") String message) throws IOException, MappingException, MarshalException, ValidationException
+	public Synset echo(@RequestParam(value="message", defaultValue="MESSAGE") String message) throws IOException, MappingException, MarshalException, ValidationException, XPathExpressionException, SAXException, ParserConfigurationException
 	{
 //		Echo echo = new Echo(message);
 //		System.out.println(echo.getMessage());
@@ -75,25 +82,29 @@ public class EchoController {
 		File file = new ClassPathResource("test.xml").getFile();
 		File mapFile = new ClassPathResource("mapping.xml").getFile();
 
-		Mapping mapping = new Mapping();
-		mapping.loadMapping(mapFile.getAbsolutePath());
+//		Mapping mapping = new Mapping();
+//		mapping.loadMapping(mapFile.getAbsolutePath());
+//		
+//		XMLContext context = new XMLContext();
+//		context.addMapping(mapping);
+//		
+//		
+//		Unmarshaller unmarshaller = context.createUnmarshaller();
+//		unmarshaller.setClass(ArrayList.class);
+//		Marshaller marshaller = context.createMarshaller();
+//		
+//		XMLConverter converter = new XMLConverter();
+//		converter.setMarshaller(marshaller);
+//		converter.setUnmarshaller(unmarshaller);
+//		
+//		ArrayList laret = (ArrayList) converter.convertFromXMLToObject(file.getAbsolutePath());
+		///////////////////////////////////
+		XMLReader xmlr = new XMLReader();
+		Synset ss = xmlr.searchForSynsetByLexicalUnit(file, "102034");
 		
-		XMLContext context = new XMLContext();
-		context.addMapping(mapping);
-		
-		
-		Unmarshaller unmarshaller = context.createUnmarshaller();
-		unmarshaller.setClass(LexArrayList.class);
-		Marshaller marshaller = context.createMarshaller();
-		
-		XMLConverter converter = new XMLConverter();
-		converter.setMarshaller(marshaller);
-		converter.setUnmarshaller(unmarshaller);
-		
-		LexArrayList laret = (LexArrayList) converter.convertFromXMLToObject(file.getAbsolutePath());
-
-		return laret;
+		return ss;
 	}
+
 	
 	@RequestMapping("/liner2")
 	public ArrayList<String> executeLiner2(@RequestParam(value="filepath", defaultValue="/opt/liner2.3/test/sentence.xml") String filepath) {
