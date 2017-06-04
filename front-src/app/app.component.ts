@@ -18,47 +18,73 @@ export class AppComponent {
                     var textType = /text.*/;
     
                     if (file.type.match(textType)) {
-                        var reader = new FileReader();
-    
-                        reader.onload = function(e) {
-                            var text = reader.result;
-                            //console.log(text);
-                            //document.getElementById('text_area').innerText = text;
+                        
+                        var promise = new Promise((resolve, reject) => {
+                            let xhr:XMLHttpRequest = new XMLHttpRequest();
+                            xhr.onreadystatechange = () => {
+                                if (xhr.readyState === 4) {
+                                    if (xhr.status === 200) {
+                                        resolve(JSON.parse(xhr.response));
+                                    } else {
+                                        reject(xhr.response);
+                                    }
+                                }
+                            };
+                            xhr.open('POST', '/mywebapp/liner2', true);
+                            let formData = new FormData();
+                            formData.append("file", file, file.name);
+                            xhr.send(formData);
+                        });
+                        promise.then((resolve) => {
+                            console.log(resolve);
+                        
+                        /**/
+                        }, (reject) => {
+                            console.error(reject);
+                        });/**/    
                             
-                            var lines = text.split("\n");
-                            for(var i = 0; i < lines.length; ++i) {
-                                var isWord = false;
-                                var word = "", sign = "";
-                                for(var j = 0; j < lines[i].length; ++j) {
-                                    sign = lines[i].charAt(j);
-                                    if(sign.toLowerCase() != sign.toUpperCase()) { // letter
-                                        isWord = true;
-                                        word += sign;
-                                    }
-                                    else {
-                                        if(isWord == true) {
-                                            var html_to_insert = "<button class="+'"'+"link"+'"'+" onClick=\"showWordDetails('"+word+"')\">"+word+"</button>";
-                                            document.getElementById('text_area').innerHTML += html_to_insert;
-                                            word = "";
-                                            
+                            var reader = new FileReader();
+        
+                            reader.onload = function(e) {
+                                var text = reader.result;
+                                //console.log(text);
+                                //document.getElementById('text_area').innerText = text;
+                                
+                                var lines = text.split("\n");
+                                for(var i = 0; i < lines.length; ++i) {
+                                    var isWord = false;
+                                    var word = "", sign = "";
+                                    for(var j = 0; j < lines[i].length; ++j) {
+                                        sign = lines[i].charAt(j);
+                                        if(sign.toLowerCase() != sign.toUpperCase()) { // letter
+                                            isWord = true;
+                                            word += sign;
                                         }
-                                        isWord = false;
-                                        document.getElementById('text_area').innerHTML += ("<div style=\"display: inline-block;\">"+sign+"</div");
+                                        else {
+                                            if(isWord == true) {
+                                                var html_to_insert = "<button class="+'"'+"link"+'"'+" onClick=\"showWordDetails('"+word+"')\">"+word+"</button>";
+                                                document.getElementById('text_area').innerHTML += html_to_insert;
+                                                word = "";
+                                                
+                                            }
+                                            isWord = false;
+                                            document.getElementById('text_area').innerHTML += ("<div style=\"display: inline-block;\">"+sign+"</div");
+                                        }
                                     }
+                                    if(isWord == true) {
+                                        var html_to_insert = "<button class=\"link\" onClick=\"showWordDetails('"+word+"')\">"+word+"</button>";
+                                        document.getElementById('text_area').innerHTML += html_to_insert;
+                                        word = "";
+                                    }
+                                    //document.getElementById('text_area2').innerText += sign;
+                                    document.getElementById('text_area').innerHTML += "<br />";
                                 }
-                                if(isWord == true) {
-                                    var html_to_insert = "<button class=\"link\" onClick=\"showWordDetails('"+word+"')\">"+word+"</button>";
-                                    document.getElementById('text_area').innerHTML += html_to_insert;
-                                    word = "";
-                                }
-                                //document.getElementById('text_area2').innerText += sign;
-                                document.getElementById('text_area').innerHTML += "<br />";
                             }
-                            //this.cdRef.detectChanges(); // to ensure the DOM is updated
-                            // add event handlers imperatively
-                            //this.elRef.nativeElement.querySelectorAll(button).forEach(b => b.addEventListener('click', this.eventHandler.bind(this)));
-                        }
-                        reader.readAsText(file, 'UTF-8');    
+                            reader.readAsText(file, 'UTF-8');
+                        /*    
+                        }, (reject) => {
+                            console.error(reject);
+                        });*/
                     } else {
                         alert("Nieobsługiwany format pliku!");
                     }
