@@ -99,6 +99,8 @@ public class XMLReader {
 	
 	public String getDefinitionFromLexicalUnit(LexicalUnit lu)
 	{
+		if(lu==null)
+			return "Nie znaleziono słowa.";
 		String desc = lu.getDesc();
 		if(desc.contains("##D:"))
 		{
@@ -114,11 +116,15 @@ public class XMLReader {
 	
 	public List<String> getExamplesFromLexicalUnit(LexicalUnit lu)
 	{
-		String sub = lu.getDesc();
 		List<String> ret = new ArrayList<>();
-		while(sub.contains("##W:"))
+		if(lu==null)
+			return ret;
+		String sub = lu.getDesc();
+		while(sub.contains("##W:") || sub.contains("##P:"))
 		{
 			int pos = sub.indexOf("##W:");
+			if(pos == -1)
+				pos = sub.indexOf("##P:");
 			sub = sub.substring(pos+5);
 			int dot = sub.indexOf(".");
 			if(dot == -1)
