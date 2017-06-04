@@ -88,12 +88,11 @@
 	   	        data: "message="+word,
 	   	        success: function(response){
 	   	            console.log("Success, response: " + JSON.stringify(response));
-	   	         	console.log(JSON.stringify(response.d.results));
-	   	         	var data = JSON.parse(response.response);
+	   	         	//var data = JSON.parse(response);
 	   	            
-	   	           	document.getElementById("Dialog-Box_pos").innerText = data["pos"];
-	   	   		    document.getElementById("Dialog-Box_definition").innerText = data["definition"];
-	   	   			document.getElementById("Dialog-Box_examples").innerText = data["examples"];
+	   	           	document.getElementById("Dialog-Box_pos").innerText = response["lexicalUnit"]["pos"];
+	   	   		    document.getElementById("Dialog-Box_definition").innerText = response["lexicalUnit"]["definition"];
+	   	   			document.getElementById("Dialog-Box_examples").innerText = response["lexicalUnit"]["examples"];
 	   	        	$('#Dialog-Box').dialog('open');
 	   	        }
 	   	    });
