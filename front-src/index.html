@@ -53,7 +53,7 @@
    		<b>Przykłady:</b> <div id="Dialog-Box_examples"></div>
    </div>
    <script>
-   		
+   		/*
 	   	$(function () {
 	    	$('#Dialog-Box').dialog({
 	           autoOpen: false,
@@ -70,11 +70,27 @@
 	   	
 	   	function openDialogBox(word) {
 	   		$('#Dialog-Box').dialog('option', 'title', 'Informacje o słowie: \''+word+'\'');
+	   		
+	   		echoControllerCall(word);
+	   		
 	   		document.getElementById("Dialog-Box_pos").innerText = "<placeholder>";
 	   		document.getElementById("Dialog-Box_definition").innerText = "<placeholder>";
 	   		document.getElementById("Dialog-Box_examples").innerText = "<placeholder>";
 	        $('#Dialog-Box').dialog('open');
 	    }
+	   	
+	   	function echoControllerCall(word) {
+	   		$.ajax({
+	   	        url: '/echo',
+	   	        dataType:'json',
+	   	        type: 'get',
+	   	        data: JSON.stringify({ 'message': word }),
+	   	        success: function(response){
+	   	              console.log("Success, response: " + response);
+	   	        }
+	   	    });
+	   	}
+	   	*/
    </script>
 </body>
 </html>
