@@ -9,6 +9,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 
+
 @SpringBootApplication
 public class SpringBootWebApplication extends SpringBootServletInitializer {
 
@@ -27,7 +28,7 @@ public class SpringBootWebApplication extends SpringBootServletInitializer {
     @PostConstruct
     void init() {
         repository.deleteAll();
-
+        
         User arthur = new User("Arthur", "Dent");
         User trillian = new User("Trillian", "McMillan");
         User ford = new User("Ford", "Prefect");
