@@ -17,36 +17,37 @@ export class AppComponent {
                     var file = fileInput.files[0];
                     var textType = /text.*/;
     
-                    if (file.type.match(textType)) {
-                        
-                        var promise = new Promise((resolve, reject) => {
-                            let xhr:XMLHttpRequest = new XMLHttpRequest();
-                            xhr.onreadystatechange = () => {
-                                if (xhr.readyState === 4) {
-                                    if (xhr.status === 200) {
-                                        resolve(JSON.parse(xhr.response));
-                                    } else {
-                                        reject(xhr.response);
-                                    }
-                                }
-                            };
-                            xhr.open('POST', '/mywebapp/liner2', true);
-                            let formData = new FormData();
-                            formData.append("file", file, file.name);
-                            xhr.send(formData);
-                        });
-                        promise.then((resolve) => {
-                            console.log(resolve);
-                        
-                        /**/
-                        }, (reject) => {
-                            console.error(reject);
-                        });/**/    
+                    if (file.type.match(textType)) { 
                             
-                            var reader = new FileReader();
-        
-                            reader.onload = function(e) {
-                                var text = reader.result;
+                        var reader = new FileReader();
+    
+                        reader.onload = function(e) {
+                            var text = reader.result;
+                            
+                            var promise = new Promise((resolve, reject) => {
+                                let xhr:XMLHttpRequest = new XMLHttpRequest();
+                                xhr.onreadystatechange = () => {
+                                    if (xhr.readyState === 4) {
+                                        if (xhr.status === 200) {
+                                            resolve(JSON.parse(xhr.response));
+                                        } else {
+                                            reject(xhr.response);
+                                        }
+                                    }
+                                };
+                                xhr.open('POST', '/mywebapp/echo/liner2', true);
+                                //let formData = new FormData();
+                                //formData.append("file", text, text.name);
+                                xhr.send(text);
+                            });
+                            promise.then((resolve) => {
+                                console.log(resolve);
+                            
+                            /**/
+                            }, (reject) => {
+                                console.error(reject);
+                            });/**/    
+                                
                                 //console.log(text);
                                 //document.getElementById('text_area').innerText = text;
                                 
@@ -79,12 +80,15 @@ export class AppComponent {
                                     //document.getElementById('text_area2').innerText += sign;
                                     document.getElementById('text_area').innerHTML += "<br />";
                                 }
-                            }
-                            reader.readAsText(file, 'UTF-8');
-                        /*    
-                        }, (reject) => {
-                            console.error(reject);
-                        });*/
+                                
+                            
+                                /*    
+                            }, (reject) => {
+                                console.error(reject);
+                            });*/       
+                        }
+                        reader.readAsText(file, 'UTF-8');
+                        
                     } else {
                         alert("Nieobsługiwany format pliku!");
                     }
