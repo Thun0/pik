@@ -46,11 +46,19 @@
 	   </script>
    </app-root>
    <div id="Dialog-Box" title="Informacje o słowie: " style="visibility: hidden;" >
-   		<b>Rodzaj:</b> <div id="Dialog-Box_pos"></div>
-   		<br />
-   		<b>Definicja:</b> <div id="Dialog-Box_definition"></div>
-   		<br />
-   		<b>Przykłady:</b> <div id="Dialog-Box_examples"></div>
+   		<div id="Dialog-Box_loading" style="visibility: hidden;">
+   			<center>Wyszukiwanie..</center>
+   		</div>
+   		<div id="Dialog-Box_error" style="visibility: hidden;">
+   			<center style="color: red;">Zapytanie zakończone błędem</center>
+   		</div>
+   		<div id="Dialog-Box_content" style="visibility: hidden;">
+	   		<b>Rodzaj:</b> <div id="Dialog-Box_pos"></div>
+	   		<br />
+	   		<b>Definicja:</b> <div id="Dialog-Box_definition"></div>
+	   		<br />
+	   		<b>Przykłady:</b> <div id="Dialog-Box_examples"></div>
+   		</div>
    </div>
    <script>
    		
@@ -71,13 +79,13 @@
 	   	function openDialogBox(word) {
 	   		$('#Dialog-Box').dialog('option', 'title', 'Informacje o słowie: \''+word+'\'');
 	   		
+	   		document.getElementById("Dialog-Box_loading").style.visibility='visible';
+	   		document.getElementById("Dialog-Box_content").style.visibility='hidden';
+	   		document.getElementById("Dialog-Box_error").style.visibility='hidden';
+	   		
 	   		echoControllerCall(word);
-	   		/*
-	   		document.getElementById("Dialog-Box_pos").innerText = "<placeholder>";
-	   		document.getElementById("Dialog-Box_definition").innerText = "<placeholder>";
-	   		document.getElementById("Dialog-Box_examples").innerText = "<placeholder>";
-	        $('#Dialog-Box').dialog('open');
-	        */
+	   		
+	   		$('#Dialog-Box').dialog('open');
 	    }
 	   	
 	   	function echoControllerCall(word) {
@@ -88,13 +96,21 @@
 	   	        data: "message="+word,
 	   	        success: function(response){
 	   	            console.log("Success, response: " + JSON.stringify(response));
-	   	         	//var data = JSON.parse(response);
 	   	            
 	   	           	document.getElementById("Dialog-Box_pos").innerText = response["lexicalUnit"]["pos"];
-	   	   		    document.getElementById("Dialog-Box_definition").innerText = response["lexicalUnit"]["definition"];
-	   	   			document.getElementById("Dialog-Box_examples").innerText = response["lexicalUnit"]["examples"];
-	   	        	$('#Dialog-Box').dialog('open');
-	   	        }
+	   	   		    document.getElementById("Dialog-Box_definition").innerText = response["definition"];
+	   	   			document.getElementById("Dialog-Box_examples").innerText = response["examples"];
+	   	   			
+	   	   			document.getElementById("Dialog-Box_loading").style.visibility='hidden';
+	   	   			document.getElementById("Dialog-Box_content").style.visibility='visible';
+	   	   			document.getElementById("Dialog-Box_error").style.visibility='hidden';
+	   	   			$('#Dialog-Box').dialog('open');
+	   	        },
+	   			error: function (response) {
+	   				document.getElementById("Dialog-Box_loading").style.visibility='hidden';
+	   	   			document.getElementById("Dialog-Box_content").style.visibility='hidden';
+	   	   			document.getElementById("Dialog-Box_error").style.visibility='visible';
+	   			}
 	   	    });
 	   	}
 	   	
