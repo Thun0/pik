@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -31,7 +32,18 @@ public class LinerCommand {
 	
 	public int run() throws IOException {
 		Process cmdProc = Runtime.getRuntime().exec(commandStr);
-	
+				try {
+					if(!cmdProc.waitFor(2, TimeUnit.MINUTES)) {
+					    //timeout - kill the process. 
+						cmdProc.destroy(); // consider using destroyForcibly instead
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		//Process cmdProc = Runtime.getRuntime().exec(commandStr);
+
+
 		BufferedReader stdoutReader = new BufferedReader(
 		         new InputStreamReader(cmdProc.getInputStream()));
 		String line;

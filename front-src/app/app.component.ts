@@ -90,7 +90,7 @@ export class AppComponent {
                         reader.readAsText(file, 'UTF-8');
                         
                     } else {
-                        alert("Nieobsługiwany format pliku!");
+                        alert("Nieobslugiwany format pliku!");
                     }
                 });
                 this.listenerRegistered = true;
