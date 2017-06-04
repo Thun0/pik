@@ -2,17 +2,79 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>PikFront</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PIK - Korpusomat Extension</title>
   <base id="base">
+  <script type="text/javascript" src="wordDetails.js"></script>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
   <script>        
   document.getElementById('base').href = document.location.origin + '/' + document.location.pathname.split('/')[1] + '/';
-  //document.getElementById('base').href = '/';
   </script>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+  div.tooltip {	
+        position: absolute;			
+        text-align: center;			
+        width: auto;					
+        height: auto;					
+        padding: 2px;					
+        background: white;	
+        border: solid;
+        border-width: 1px;
+        border-color: gray;			
+        pointer-events: none;			
+    }
+  </style>
 </head>
 <body>
-  <app-root>Loading...</app-root>
+  <app-root>
+	   <center>
+	   		<h2 id="h2-loading">
+	   		 	Loading...
+	 		</h2>	
+	   </center>
+	   <script>
+	   		var intervalId = setInterval(function(){
+	   			var elem = document.getElementById("h2-loading");
+	   			if(elem != null) elem.innerHTML = "Loading...</br>(If you still see it after a while, something is probably messed up)";
+	   			clearInterval(intervalId);
+	   		}, 5000);
+	   </script>
+   </app-root>
+   <div id="Dialog-Box" title="Informacje o słowie: " style="visibility: hidden;" >
+   		<b>Rodzaj:</b> <div id="Dialog-Box_pos"></div>
+   		<br />
+   		<b>Definicja:</b> <div id="Dialog-Box_definition"></div>
+   		<br />
+   		<b>Przykłady:</b> <div id="Dialog-Box_examples"></div>
+   </div>
+   <script>
+   		
+	   	$(function () {
+	    	$('#Dialog-Box').dialog({
+	           autoOpen: false,
+	           height: 300,
+	           width: 500,
+	           modal: false,
+	    	});
+	    	document.getElementById("Dialog-Box").style.visibility='visible';
+	   	});
+	   	
+	   	function showWordDetails(word) {
+	   		openDialogBox(word);
+	   	}
+	   	
+	   	function openDialogBox(word) {
+	   		$('#Dialog-Box').dialog('option', 'title', 'Informacje o słowie: \''+word+'\'');
+	   		document.getElementById("Dialog-Box_pos").innerText = "<placeholder>";
+	   		document.getElementById("Dialog-Box_definition").innerText = "<placeholder>";
+	   		document.getElementById("Dialog-Box_examples").innerText = "<placeholder>";
+	        $('#Dialog-Box').dialog('open');
+	    }
+   </script>
 </body>
 </html>
