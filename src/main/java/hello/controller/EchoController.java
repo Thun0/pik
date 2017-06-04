@@ -121,12 +121,14 @@ public class EchoController {
 	@RequestMapping("/liner2")
 	public ArrayList<String> executeLiner2(@RequestParam(value="filepath", defaultValue="/opt/liner2.3/test/sentence.xml") String filepath) {
 		LinerCommand cmd = new LinerCommand(filepath);
+		int val = 1337;
 		try {
-			cmd.run();
+			val = cmd.run();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		ArrayList<String> s = cmd.getTokens();
+		s.add((new Integer(val)).toString());
 		/*if(s.size() == 0) {
 			s.add("Something went terribly wrong!");
 		}*/
