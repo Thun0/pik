@@ -1,21 +1,13 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "lib": [ "es2015", "dom" ],
-    "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "typeRoots": [
-      "../node_modules/@types/"
-    ]
+    "outDir": "../out-tsc/app",
+    "module": "es2015",
+    "baseUrl": "",
+    "types": []
   },
-  "compileOnSave": true,
   "exclude": [
-    "node_modules/*",
-    "**/*-aot.ts"
+    "test.ts",
+    "**/*.spec.ts"
   ]
 }

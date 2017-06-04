@@ -32,7 +32,6 @@ gradlew.bat
 
 # dependencies
 /node_modules
-/front-src/node_modules
 
 # IDEs and editors
 /.idea
