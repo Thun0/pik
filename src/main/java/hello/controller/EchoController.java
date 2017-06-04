@@ -79,7 +79,7 @@ public class EchoController {
 	
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	public LexicalUnitJson echo(@RequestParam(value="message", defaultValue=">") String message,
-			@RequestParam(value="filepath", defaultValue="/opt/plwosfadafsfsdrdnet.xml") String filepath) throws IOException, MappingException, MarshalException, ValidationException, XPathExpressionException, SAXException, ParserConfigurationException
+			@RequestParam(value="filepath", defaultValue="/opt/plwordnet.xml") String filepath) throws IOException, MappingException, MarshalException, ValidationException, XPathExpressionException, SAXException, ParserConfigurationException
 	{
 		File file = new File(filepath);
     	XMLReader.setDocAndFactory(file);
