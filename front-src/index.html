@@ -84,7 +84,7 @@
 	   	        url: '/echo',
 	   	        dataType:'json',
 	   	        type: 'get',
-	   	        data: JSON.stringify({ 'message': word }),
+	   	        data: "message="+word,
 	   	        success: function(response){
 	   	              console.log("Success, response: " + response);
 	   	        }
