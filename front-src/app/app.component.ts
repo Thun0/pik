@@ -34,31 +34,14 @@ export class AppComponent {
                                             reject(xhr.response);
                                         }
                                     }
-<<<<<<< HEAD
-                                }
-                            };
-                            xhr.open('POST', '/mywebapp/upload', true);
-                            let formData = new FormData();
-                            formData.append("file", file, file.name);
-                            xhr.send(formData);
-                        });
-                        promise.then((resolve) => {
-                            console.log(resolve);
-                        
-                        /**/
-                        }, (reject) => {
-                            console.error(reject);
-                        });/**/    
-=======
                                 };
                                 xhr.open('POST', '/mywebapp/echo/liner2', true);
                                 //let formData = new FormData();
-                                //formData.append("file", text, text.name);
+                                //formData.append("file", file, file.name);
                                 xhr.send(text);
                             });
                             promise.then((resolve) => {
                                 console.log(resolve);
->>>>>>> 61c8b6ce704931de63ad7e87f6d3d6b47bce6154
                             
                             /**/
                             }, (reject) => {
