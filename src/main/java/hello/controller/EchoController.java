@@ -107,7 +107,7 @@ public class EchoController {
 	}
 	
 	@RequestMapping("/liner2")
-	public ArrayList<String> executeLiner2(@RequestParam(value="filepath", defaultValue="/opt/liner2.3/test/sentence.xml") String filepath) {
+	public ArrayList<Integer> executeLiner2(@RequestParam(value="filepath", defaultValue="/opt/liner2.3/test/sentence.xml") String filepath) {
 		LinerCommand cmd = new LinerCommand(filepath);
 		int val = 1337;
 		try {
@@ -115,7 +115,6 @@ public class EchoController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		ArrayList<String> s = cmd.getTokens();
-		return s;
+		return cmd.getIdxList();
 	}
 }
