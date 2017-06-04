@@ -30,7 +30,7 @@ export class AppComponent {
                                     }
                                 }
                             };
-                            xhr.open('POST', '/mywebapp/liner2', true);
+                            xhr.open('POST', '/mywebapp/upload', true);
                             let formData = new FormData();
                             formData.append("file", file, file.name);
                             xhr.send(formData);
