@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -21,12 +22,22 @@ public class LinerCommand {
 	private String commandStr;
 	private ArrayList<String> text;
 	private ArrayList<Integer> idxList;
+	private File tmp;
 	
-	public LinerCommand(String path) {
-		commandStr = "/usr/local/bin/liner2 pipe -ini /opt/liner2.3/liner2-models-fat-pack/config-muc.ini -i ccl -f " + path + " -o tuples";
-		text = new ArrayList<String>();
-		idxList = new ArrayList<Integer>();
-		parseXML(path);
+	public LinerCommand(String body) {
+		try {
+			tmp = File.createTempFile(null, null, null);
+			String path = tmp.getAbsolutePath();
+			PrintWriter writer = new PrintWriter(path, "UTF-8");
+		    writer.println(body);
+		    writer.close();
+		    commandStr = "/usr/local/bin/liner2 pipe -ini /opt/liner2.3/liner2-models-fat-pack/config-muc.ini -i ccl -f " + path + " -o tuples";
+			text = new ArrayList<String>();
+			idxList = new ArrayList<Integer>();
+			parseXML(path);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
 	}
 	
 	public int run() throws IOException {
@@ -57,6 +68,7 @@ public class LinerCommand {
 				}
 			}
 		}
+		tmp.delete();
 		return cmdProc.exitValue();
 	}
 	
