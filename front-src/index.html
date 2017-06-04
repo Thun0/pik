@@ -98,7 +98,7 @@
 	   	            console.log("Success, response: " + JSON.stringify(response));
 	   	            
 	   	           	if(response["lexicalUnit"] != null) document.getElementById("Dialog-Box_pos").innerText = response["lexicalUnit"]["pos"];
-	   	           	else document.getElementById("Dialog-Box_pos").innerText = "";
+	   	           	else document.getElementById("Dialog-Box_pos").innerText = " ";
 	   	   		    document.getElementById("Dialog-Box_definition").innerText = response["definition"];
 	   	   			document.getElementById("Dialog-Box_examples").innerText = response["examples"];
 	   	   			
