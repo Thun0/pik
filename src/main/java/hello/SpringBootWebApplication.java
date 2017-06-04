@@ -45,8 +45,8 @@ public class SpringBootWebApplication extends SpringBootServletInitializer {
 //        repository.save(trillian);
 //        repository.save(ford);
 //    	File file = new ClassPathResource("plwordnet.xml").getFile();
-    	File file = new File("/opt/plwordnet.xml");
-    	XMLReader.setDocAndFactory(file);
+//    	File file = new File("/opt/plwordnet.xml");
+//    	XMLReader.setDocAndFactory(file);
     }
 
 }
