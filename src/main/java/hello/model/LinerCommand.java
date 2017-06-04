@@ -23,7 +23,7 @@ public class LinerCommand {
 		         new InputStreamReader(cmdProc.getInputStream()));
 		String line;
 		while ((line = stdoutReader.readLine()) != null) {
-			//tokens.add(getToken(line));
+			line = line.substring(line.indexOf("\"")+1, line.length()-2);
 			tokens.add(line);
 		}
 		
@@ -32,7 +32,7 @@ public class LinerCommand {
 	
 	private String getToken(String line) {
 		int beginning = line.indexOf("\"");
-		return line.substring(beginning, line.length()-2);
+		return line.substring(beginning+1, line.length()-2);
 	}
 	
 	public ArrayList<String> getTokens() {
