@@ -78,9 +78,6 @@ var AppComponent = (function () {
             console.log("[ERR] Load mode undefined!");
         }
     };
-    AppComponent.prototype.handleClick = function (event) {
-        console.log(event);
-    };
     return AppComponent;
 }());
 AppComponent = __decorate([

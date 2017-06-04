@@ -87,8 +87,4 @@ export class AppComponent {
             console.log("[ERR] Load mode undefined!");
         }    
     }
-    
-    handleClick(event) {
-        console.log(event);
-    }
 }
