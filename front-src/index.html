@@ -72,11 +72,12 @@
 	   		$('#Dialog-Box').dialog('option', 'title', 'Informacje o słowie: \''+word+'\'');
 	   		
 	   		echoControllerCall(word);
-	   		
+	   		/*
 	   		document.getElementById("Dialog-Box_pos").innerText = "<placeholder>";
 	   		document.getElementById("Dialog-Box_definition").innerText = "<placeholder>";
 	   		document.getElementById("Dialog-Box_examples").innerText = "<placeholder>";
 	        $('#Dialog-Box').dialog('open');
+	        */
 	    }
 	   	
 	   	function echoControllerCall(word) {
@@ -87,10 +88,12 @@
 	   	        data: "message="+word,
 	   	        success: function(response){
 	   	            console.log("Success, response: " + response);
-	   	              
-	   	           	document.getElementById("Dialog-Box_pos").innerText = "<placeholder>";
-	   	   		    document.getElementById("Dialog-Box_definition").innerText = "<placeholder>";
-	   	   			document.getElementById("Dialog-Box_examples").innerText = "<placeholder>";
+	   	            
+	   	         	var data = JSON.parse(response.response);
+	   	            
+	   	           	document.getElementById("Dialog-Box_pos").innerText = data["pos"];
+	   	   		    document.getElementById("Dialog-Box_definition").innerText = data["definition"];
+	   	   			document.getElementById("Dialog-Box_examples").innerText = data["examples"];
 	   	        	$('#Dialog-Box').dialog('open');
 	   	        }
 	   	    });
