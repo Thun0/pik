@@ -41,6 +41,7 @@ public class LinerCommand {
 			String[] indices = line.split(",");
 			int idx1 = Integer.parseInt(indices[0].substring(1));
 			int idx2 = Integer.parseInt(indices[1]);
+			idx2 = idx2 - idx1 + 1;
 			while(idx1 > charCount && wordIndex < text.size()) {
 				charCount += text.get(wordIndex).length();
 				wordIndex++;
@@ -49,11 +50,11 @@ public class LinerCommand {
 				int wordSize = 0;
 				while(wordSize < idx2) {
 					idxList.add(wordIndex);
+					System.out.println(wordIndex);
 					wordSize += text.get(wordIndex).length();
+					charCount += text.get(wordIndex).length();
 					wordIndex++;
-					charCount += wordSize;
 				}
-				idxList.add(-1337);
 			}
 		}
 		return cmdProc.exitValue();
