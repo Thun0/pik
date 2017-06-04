@@ -11,7 +11,7 @@ public class LinerCommand {
 	private ArrayList<String> tokens;
 	
 	public LinerCommand(String path) {
-		commandStr = "liner2 pipe -ini /opt/liner2.3/liner2-models-fat-pack/config-muc.ini -i ccl -f" + path + " -o tuples";
+		commandStr = "liner2 pipe -ini /opt/liner2.3/liner2-models-fat-pack/config-muc.ini -i ccl -f " + path + " -o tuples";
 		tokens = new ArrayList<String>();
 	}
 	
@@ -23,8 +23,7 @@ public class LinerCommand {
 		         new InputStreamReader(cmdProc.getInputStream()));
 		String line;
 		while ((line = stdoutReader.readLine()) != null) {
-			tokens.add(line);
-		   //tokens.add(getToken(line));
+			tokens.add(getToken(line));
 		}
 		
 		return cmdProc.exitValue();

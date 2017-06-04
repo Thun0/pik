@@ -127,9 +127,9 @@ public class EchoController {
 			e.printStackTrace();
 		}
 		ArrayList<String> s = cmd.getTokens();
-		if(s.size() == 0) {
+		/*if(s.size() == 0) {
 			s.add("Something went terribly wrong!");
-		}
+		}*/
 		return s;
 	}
 }
