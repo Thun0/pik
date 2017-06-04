@@ -14,10 +14,12 @@ apply plugin: 'war'
 
 
 task npmInstall(type:Exec) {
+	workingDir = file("${project.projectDir}/front-src")
     commandLine = [System.properties['os.name'].toLowerCase().contains('windows') ? 'npm.cmd' : 'npm', 'install']
 }
 
 task ngBuild(type:Exec) {
+	workingDir = file("${project.projectDir}/front-src")
     commandLine = [System.properties['os.name'].toLowerCase().contains('windows') ? 'ng.cmd' : 'ng', 'build']
 }
 
