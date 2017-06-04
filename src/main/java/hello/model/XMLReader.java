@@ -25,13 +25,19 @@ import hello.Synset;
 
 public class XMLReader {
 
-	DocumentBuilderFactory factory;
-	Document doc;
+	static DocumentBuilderFactory factory;
+	static Document doc;
 	
-	public LexicalUnit searchForLexicalUnit(File file, String attribute, String target) throws SAXException, IOException, ParserConfigurationException, XPathExpressionException
+	public static void setDocAndFactory(File file) throws SAXException, IOException, ParserConfigurationException
 	{
 		factory = DocumentBuilderFactory.newInstance();
         doc = factory.newDocumentBuilder().parse(file);
+	}
+	
+	public LexicalUnit searchForLexicalUnit(String attribute, String target) throws SAXException, IOException, ParserConfigurationException, XPathExpressionException
+	{
+//		factory = DocumentBuilderFactory.newInstance();
+//        doc = factory.newDocumentBuilder().parse(file);
 
         XPathFactory xFactory = XPathFactory.newInstance();
         XPath xPath = xFactory.newXPath();
@@ -50,10 +56,10 @@ public class XMLReader {
         	return null;
 	}
 	
-	public Synset searchForSynset(File file, String attribute, String target) throws SAXException, IOException, ParserConfigurationException, XPathExpressionException
+	public Synset searchForSynset(String attribute, String target) throws SAXException, IOException, ParserConfigurationException, XPathExpressionException
 	{
-		factory = DocumentBuilderFactory.newInstance();
-        doc = factory.newDocumentBuilder().parse(file);
+//		factory = DocumentBuilderFactory.newInstance();
+//        doc = factory.newDocumentBuilder().parse(file);
 
         XPathFactory xFactory = XPathFactory.newInstance();
         XPath xPath = xFactory.newXPath();

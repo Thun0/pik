@@ -3,6 +3,7 @@ package hello.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.xml.parsers.ParserConfigurationException;
@@ -28,6 +29,7 @@ import org.xml.sax.SAXException;
 
 import hello.LexArrayList;
 import hello.LexicalUnit;
+import hello.LexicalUnitJson;
 import hello.MyFileReader;
 import hello.Synset;
 import hello.XMLConverter;
@@ -76,35 +78,18 @@ public class EchoController {
 	
 	
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
-	public Synset echo(@RequestParam(value="message", defaultValue="MESSAGE") String message) throws IOException, MappingException, MarshalException, ValidationException, XPathExpressionException, SAXException, ParserConfigurationException
+	public LexicalUnitJson echo(@RequestParam(value="message", defaultValue=">") String message) throws IOException, MappingException, MarshalException, ValidationException, XPathExpressionException, SAXException, ParserConfigurationException
 	{
-//		Echo echo = new Echo(message);
-//		System.out.println(echo.getMessage());
-	
-		File file = new ClassPathResource("test.xml").getFile();
-		File mapFile = new ClassPathResource("mapping.xml").getFile();
-
-//		Mapping mapping = new Mapping();
-//		mapping.loadMapping(mapFile.getAbsolutePath());
-//		
-//		XMLContext context = new XMLContext();
-//		context.addMapping(mapping);
-//		
-//		
-//		Unmarshaller unmarshaller = context.createUnmarshaller();
-//		unmarshaller.setClass(ArrayList.class);
-//		Marshaller marshaller = context.createMarshaller();
-//		
-//		XMLConverter converter = new XMLConverter();
-//		converter.setMarshaller(marshaller);
-//		converter.setUnmarshaller(unmarshaller);
-//		
-//		ArrayList laret = (ArrayList) converter.convertFromXMLToObject(file.getAbsolutePath());
-		///////////////////////////////////
 		XMLReader xmlr = new XMLReader();
-		Synset ss = xmlr.searchForSynsetByLexicalUnit(file, "102034");
-		LexicalUnit lu = xmlr.searchForLexicalUnit(file, "name", "-krotny");
-		return ss;
+		LexicalUnit lu = xmlr.searchForLexicalUnit("name", message);
+		String def = xmlr.getDefinitionFromLexicalUnit(lu);
+		List<String> exs = xmlr.getExamplesFromLexicalUnit(lu);
+		LexicalUnitJson luj = new LexicalUnitJson();
+		luj.setLexicalUnit(lu);
+		luj.setDefinition(def);
+		luj.setExamples(exs);
+
+		return luj;
 	}
 
 	@RequestMapping("/def")
@@ -114,18 +99,20 @@ public class EchoController {
 		File file = new ClassPathResource(filepath).getFile();
 		
 		XMLReader xmlr = new XMLReader();
-		LexicalUnit lu = xmlr.searchForLexicalUnit(file, "name", "-krotny");
+		LexicalUnit lu = xmlr.searchForLexicalUnit("name", "-krotny");
 		return xmlr.getDefinitionFromLexicalUnit(lu);
 	}
 	
 	@RequestMapping("/liner2")
 	public ArrayList<String> executeLiner2(@RequestParam(value="filepath", defaultValue="/opt/liner2.3/test/sentence.xml") String filepath) {
 		LinerCommand cmd = new LinerCommand(filepath);
+		int val = 1337;
 		try {
-			cmd.run();
+			val = cmd.run();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return cmd.getTokens();
+		ArrayList<String> s = cmd.getTokens();
+		return s;
 	}
 }
