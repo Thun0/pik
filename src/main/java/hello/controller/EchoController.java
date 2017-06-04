@@ -107,7 +107,7 @@ public class EchoController {
 	}
 	
 	@RequestMapping("/liner2")
-	public ArrayList<Integer> executeLiner2(@RequestParam(value="filepath", defaultValue="/opt/liner2.3/test/sentence.xml") String filepath) {
+	public ArrayList<Integer> executeLiner2(@RequestParam(value="file", defaultValue="/opt/liner2.3/test/sentence.xml") String filepath) {
 		LinerCommand cmd = new LinerCommand(filepath);
 		try {
 			cmd.run();
