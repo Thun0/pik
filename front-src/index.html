@@ -87,8 +87,8 @@
 	   	        type: 'get',
 	   	        data: "message="+word,
 	   	        success: function(response){
-	   	            console.log("Success, response: " + response);
-	   	            
+	   	            console.log("Success, response: " + JSON.stringify(response));
+	   	         	console.log(JSON.stringify(response.d.results));
 	   	         	var data = JSON.parse(response.response);
 	   	            
 	   	           	document.getElementById("Dialog-Box_pos").innerText = data["pos"];
