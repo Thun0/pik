@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PIK - Korpusomat Extension</title>
   <base id="base">
-  <script type="text/javascript" src="wordDetails.js"></script>
+  <!-- <script type="text/javascript" src="wordDetails.js"></script> -->
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -81,12 +81,17 @@
 	   	
 	   	function echoControllerCall(word) {
 	   		$.ajax({
-	   	        url: '/echo',
+	   	        url: '/mywebapp/echo',
 	   	        dataType:'json',
 	   	        type: 'get',
 	   	        data: "message="+word,
 	   	        success: function(response){
-	   	              console.log("Success, response: " + response);
+	   	            console.log("Success, response: " + response);
+	   	              
+	   	           	document.getElementById("Dialog-Box_pos").innerText = "<placeholder>";
+	   	   		    document.getElementById("Dialog-Box_definition").innerText = "<placeholder>";
+	   	   			document.getElementById("Dialog-Box_examples").innerText = "<placeholder>";
+	   	        	$('#Dialog-Box').dialog('open');
 	   	        }
 	   	    });
 	   	}
