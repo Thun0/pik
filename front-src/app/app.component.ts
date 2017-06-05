@@ -91,7 +91,7 @@ export class AppComponent {
                                         }
                                     }
                                 };
-                                xhr.open('POST', '/' + document.location.pathname.split('/')[1] + '/echo/liner2' + '?filepath=' + file.name, true);
+                                xhr.open('POST', '/' + document.location.pathname.split('/')[1] + '/echo/liner2' + '?filepath=/opt/liner2.3/test/' + file.name, true);
                                 //let formData = new FormData();
                                 //formData.append("file", file, file.name);
                                 xhr.send(text);
