@@ -41,40 +41,11 @@ export class AppComponent {
                                 xhr.send(text);
                             });
                             promise.then((resolve) => {
-                              document.getElementById('text_area').innerHTML = '';
-                              document.getElementById('text_area').innerHTML += resolve + "<br />";
-                                //console.log(resolve);
-                            /**/
-                            }, (reject) => {
-                                console.error(reject);
-                            });/**/   
-                          
-                            var promise = new Promise((resolve, reject) => {
-                                let xhr:XMLHttpRequest = new XMLHttpRequest();
-                                xhr.onreadystatechange = () => {
-                                    if (xhr.readyState === 4) {
-                                        if (xhr.status === 200) {
-                                            resolve(JSON.parse(xhr.response));
-                                        } else {
-                                            reject(xhr.response);
-                                        }
-                                    }
-                                };
-                                xhr.open('POST', '/' + document.location.pathname.split('/')[1] + '/echo/liner2', true);
-                                //let formData = new FormData();
-                                //formData.append("file", file, file.name);
-                                xhr.send(text);
-                            });
-                            promise.then((resolve) => {
-                                console.log(resolve);
-                            /**/
-                            }, (reject) => {
-                                console.error(reject);
-                            });/**/    
+                              //document.getElementById('text_area').innerHTML = '';
+                              //document.getElementById('text_area').innerHTML += resolve + "<br />";
+                              //console.log(resolve);
                                 
-                                //console.log(text);
-                                //document.getElementById('text_area').innerText = text;
-                                /**
+                                text = resolve;
                                 var lines = text.split("\n");
                                 for(var i = 0; i < lines.length; ++i) {
                                     var isWord = false;
@@ -103,9 +74,35 @@ export class AppComponent {
                                     }
                                     //document.getElementById('text_area2').innerText += sign;
                                     document.getElementById('text_area').innerHTML += "<br />";
-                                }*/
+                                }
+                            /**/
+                            }, (reject) => {
+                                console.error(reject);
+                            });/**/   
+                          
+                            var promise = new Promise((resolve, reject) => {
+                                let xhr:XMLHttpRequest = new XMLHttpRequest();
+                                xhr.onreadystatechange = () => {
+                                    if (xhr.readyState === 4) {
+                                        if (xhr.status === 200) {
+                                            resolve(JSON.parse(xhr.response));
+                                        } else {
+                                            reject(xhr.response);
+                                        }
+                                    }
+                                };
+                                xhr.open('POST', '/' + document.location.pathname.split('/')[1] + '/echo/liner2', true);
+                                //let formData = new FormData();
+                                //formData.append("file", file, file.name);
+                                xhr.send(text);
+                            });
+                            promise.then((resolve) => {
+                                console.log(resolve);
+                            /**/
+                            }, (reject) => {
+                                console.error(reject);
+                            });/**/    
                                 
-                            
                                 /*    
                             }, (reject) => {
                                 console.error(reject);
