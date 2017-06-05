@@ -76,6 +76,10 @@ public class LinerCommand {
 		return idxList;
 	}
 	
+	public ArrayList<String> getText() {
+		return text;
+	}
+	
 	public void parseXML(String path) {
 		try {
 			File inputFile = new File(path);

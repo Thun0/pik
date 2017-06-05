@@ -117,4 +117,11 @@ public class EchoController {
 		}
 		return cmd.getIdxList();
 	}
+	
+	@RequestMapping("/txtfile")
+	public ArrayList<String> parseCCL(@RequestParam(value="filepath", defaultValue="/opt/liner2.3/test/sentence.xml") String filepath) {
+		LinerCommand cmd = new LinerCommand(filepath);
+		cmd.parseXML(filepath);
+		return cmd.getText();
+	}
 }
