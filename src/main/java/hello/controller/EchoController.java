@@ -119,9 +119,15 @@ public class EchoController {
 	}
 	
 	@RequestMapping("/txtfile")
-	public ArrayList<String> parseCCL(@RequestParam(value="filepath", defaultValue="/opt/liner2.3/test/sentence.xml") String filepath) {
+	public String parseCCL(@RequestParam(value="filepath", defaultValue="/opt/liner2.3/test/sentence.xml") String filepath) {
 		LinerCommand cmd = new LinerCommand(filepath);
 		cmd.parseXML(filepath);
-		return cmd.getText();
+		String response = "";
+		ArrayList<String> list = cmd.getText();
+		for (String s : list) {
+			response += s;
+			response += " ";
+		}
+		return response;
 	}
 }

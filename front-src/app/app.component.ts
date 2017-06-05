@@ -21,15 +21,15 @@ export class AppComponent {
                             
                         var reader = new FileReader();
     
-                        reader.onload = function(e) {
+                        reader.onload = function(event) {
                             var text = reader.result;
 
                             var promise = new Promise((resolve, reject) => {
-                                let xhr:XMLHttpRequest = new XMLHttpRequest();
+                                let xhr: XMLHttpRequest = new XMLHttpRequest();
                                 xhr.onreadystatechange = () => {
                                     if (xhr.readyState === 4) {
                                         if (xhr.status === 200) {
-                                            resolve(JSON.parse(xhr.response));
+                                            resolve(xhr.response); //XMLHttpRequest.response == the response's body
                                         } else {
                                             reject(xhr.response);
                                         }
@@ -41,7 +41,9 @@ export class AppComponent {
                                 xhr.send(text);
                             });
                             promise.then((resolve) => {
-                              document.getElementById('text_area').innerHTML = resolve + "<br />";
+                              document.getElementById('text_area').innerHTML = '';
+                              document.getElementById('text_area').innerHTML += resolve + "<br />";
+
                                 //console.log(resolve);
                             /**/
                             }, (reject) => {
