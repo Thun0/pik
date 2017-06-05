@@ -43,7 +43,6 @@ export class AppComponent {
                             promise.then((resolve) => {
                               document.getElementById('text_area').innerHTML = '';
                               document.getElementById('text_area').innerHTML += resolve + "<br />";
-
                                 //console.log(resolve);
                             /**/
                             }, (reject) => {
