@@ -45,7 +45,7 @@ export class AppComponent {
                               //document.getElementById('text_area').innerHTML += resolve + "<br />";
                               //console.log(resolve);
                                 
-                                text = resolve;
+                                //text = resolve;
                                 var lines = text.split("\n");
                                 for(var i = 0; i < lines.length; ++i) {
                                     var isWord = false;
@@ -91,13 +91,18 @@ export class AppComponent {
                                         }
                                     }
                                 };
-                                xhr.open('POST', '/' + document.location.pathname.split('/')[1] + '/echo/liner2', true);
+                                xhr.open('POST', '/' + document.location.pathname.split('/')[1] + '/echo/liner2' + '?filepath=' + file.name, true);
                                 //let formData = new FormData();
                                 //formData.append("file", file, file.name);
                                 xhr.send(text);
                             });
                             promise.then((resolve) => {
                                 console.log(resolve);
+                                var buttons = document.getElementsByClassName("link");
+                                for(var index in resolve[0]) {
+                                    
+                                    buttons[index].style.backgroundColor = "yellow";        
+                                }    
                             /**/
                             }, (reject) => {
                                 console.error(reject);
